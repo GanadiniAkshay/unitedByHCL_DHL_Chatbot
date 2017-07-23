@@ -6,6 +6,7 @@ var builder = require('botbuilder')
 //=================================================
 var misc     = require('./smalltalk/misc.js');
 var quotes   = require('./quote/getquote.js');
+var location = require('./locations/getlocations.js')
 
 //Setup Restify Server
 var server = restify.createServer();
@@ -49,5 +50,16 @@ intents.matches('getQuote',[
         session.userData.location = location;
         totalPrice = quotes.getPrice(location,session.userData.items);
         session.endDialog("That would cost you " + totalPrice);
+    }
+]);
+
+intents.matches('findLocations',[
+    function(session){
+        builder.Prompts.text(session,"Enter your zipcode");
+    },
+    function(session, results){
+        zip = results.entity;
+        location = locations.findLocations(zip);
+        session.endDialog("Here is the nearest DHL location: " + location);
     }
 ])
