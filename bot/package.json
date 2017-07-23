@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/GanadiniAkshay/unitedByHCL_DHL_Chatbot#readme",
   "dependencies": {
+    "api-ai-recognizer": "^1.1.1",
     "botbuilder": "^3.8.4",
     "restify": "^5.0.1"
   }
