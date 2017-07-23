@@ -7,6 +7,7 @@ var builder = require('botbuilder')
 var misc     = require('./smalltalk/misc.js');
 var quotes   = require('./quote/getquote.js');
 var location = require('./locations/getlocations.js')
+var pickup   = require('./pickup/pickup.js');
 
 //Setup Restify Server
 var server = restify.createServer();
@@ -61,5 +62,22 @@ intents.matches('findLocations',[
         zip = results.entity;
         location = locations.findLocations(zip);
         session.endDialog("Here is the nearest DHL location: " + location);
+    }
+]);
+
+intents.matches('pickup',[
+    function(session){
+        builder.Prompts.choice(session,"Where do you want the package to be picked up from","office|home");
+    },
+    function(session,results){
+        loc = results.entity;
+        session.userData.loc = loc;
+        builder.Prompts.time(session,"When do you want it to be picked up");
+    },
+    function(session, results){
+        time = results.entity;
+        session.userData.time = time;
+        pickup.schedule(session.userData.loc,session.userData.time);
+        session.endDialog("Your pickup has been scheduled");
     }
 ])
