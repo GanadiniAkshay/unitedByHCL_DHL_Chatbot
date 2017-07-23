@@ -34,3 +34,20 @@ bot.dialog('/', intents);
 
 // Recieve Messages from the user and respond by handling the intent
 intents.matches('smalltalk.greetings', misc.smalltalk);
+
+intents.matches('getQuote',[
+    function(session){
+        builder.Prompts.text(session,"What items do you want to send? (comma seperated if multiple)");
+    },
+    function(session,results){
+        items = results.entity;
+        session.userData.items = items;
+        builder.Prompts.choice(session,"Where do you want to send the package?","UK|Europe-Non EU| Europe-EU| USA, Canada & Mexico| Rest of World");
+    },
+    function(session, results){
+        location = results.entity;
+        session.userData.location = location;
+        totalPrice = quotes.getPrice(location,session.userData.items);
+        session.endDialog("That would cost you " + totalPrice);
+    }
+])
