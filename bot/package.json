@@ -1,0 +1,28 @@
+{
+  "name": "dhlbot",
+  "version": "1.0.0",
+  "description": "DHL Chatbot for united by HCL hackathon",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GanadiniAkshay/unitedByHCL_DHL_Chatbot.git"
+  },
+  "keywords": [
+    "chatbot",
+    "DHL",
+    "AI"
+  ],
+  "author": "Akshay Kulkarni",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GanadiniAkshay/unitedByHCL_DHL_Chatbot/issues"
+  },
+  "homepage": "https://github.com/GanadiniAkshay/unitedByHCL_DHL_Chatbot#readme",
+  "dependencies": {
+    "botbuilder": "^3.8.4",
+    "restify": "^5.0.1"
+  }
+}
